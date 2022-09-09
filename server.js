@@ -1,7 +1,8 @@
-import http, { Server } from 'http';
+import http from 'http';
+import api from './api/api.js'
 
 const port = 3000;
-const server = http.createServer();
+const server = http.createServer(api);
 
 
 server.on('listening',()=>{
