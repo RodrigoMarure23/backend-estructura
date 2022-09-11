@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
     author: 
         {type:String,
-        required:true,},
+        required:true,}, // hace este campo obligatorio en el request
     title: String,
     genre: String,
     category: String,
