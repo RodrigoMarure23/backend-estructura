@@ -47,7 +47,36 @@ const getBookById = async (req, res) => {
         })
     }
 };
-const updateBookById = (req, res) => { };
-const deleteBookById = (req, res) => { };
+const updateBookById = async (req, res) => {
+    try {
+        const {id }= req.params
+        const updatedBook = await Book.findByIdAndUpdate(id,req.body,{new:true});// filtro de busqueda, que se actualiza, mostrar el nuevo objeto actualizado
+        return res.json({
+            msg:"Libro actualizado por id ",
+            data:{Book:updatedBook},
+        });
+    } catch (error) {
+        return res.status(500).json({
+            msg:"Error al actualizar el libro por id",
+            error: error
+        });
+    };
+ };
+const deleteBookById = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const deletedBook = await Book.findByIdAndDelete(id);
+        return res.json({
+            msg:"Libro borrado exitosamente",
+            data:{deletedBook:deletedBook}
+        })
+    } catch (error) {
+        return res.status(500).json({
+            msg:"Error al borrar libro por id",
+            error:error
+        })
+    } 
+    
+};
 export { getAllBooks, createBook, getBookById, updateBookById, deleteBookById };
 
