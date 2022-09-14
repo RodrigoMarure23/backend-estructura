@@ -66,6 +66,11 @@ const deleteBookById = async (req, res) => {
     try {
         const {id} = req.params;
         const deletedBook = await Book.findByIdAndDelete(id);
+        if(!deletedBook){
+            return res.status(404).json({
+                msg:"Libro no encontrado"
+            })
+        }
         return res.json({
             msg:"Libro borrado exitosamente",
             data:{deletedBook:deletedBook}

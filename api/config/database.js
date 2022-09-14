@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import config from './index.js';
 const db = mongoose.connection;
 
 db.on('connecting', () => {
@@ -13,5 +13,5 @@ db.on('error', () => {
 })
 
 export default () => {
-    mongoose.connect('mongodb+srv://usuario1:12345Feb@cluster0.4mlvpxs.mongodb.net/Library?retryWrites=true&w=majority')
+    mongoose.connect(config.database.uri)
 }
