@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-dotenv.config({});// con esto se meten las variables de .env a las environment variables
+dotenv.config();// con esto se meten las variables de .env a las environment variables
 
 export default{ 
     database:{

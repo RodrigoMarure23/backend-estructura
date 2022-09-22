@@ -3,7 +3,10 @@ const schema = new mongoose.Schema({
     author: 
         {type:String,
         required:true,}, // hace este campo obligatorio en el request
-    title: String,
+    title: {
+        type:String,
+        required:true
+    },
     genre: String,
     category: String,
     language: String,

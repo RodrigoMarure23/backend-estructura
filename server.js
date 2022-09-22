@@ -24,5 +24,5 @@ server.on('error',()=>{
 
 
 
-server.listen(config.server.port);
+server.listen(port);
 database();
