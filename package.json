@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/RodrigoMarure23/backend-estructura#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "joi": "^17.6.0",
     "moongose": "^1.0.0"
   }
 }
- 
