@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
-
+import jwt from 'jwt-simple';
+import config from '../config/index.js'
 const register = async (req,res,next) =>{
     try {
         /**
@@ -41,23 +42,31 @@ const login = async (req,res,next) => {
 
     try {
         const user = await User.findOne({
-            email: req.body.email
+            email: req.body.email // aqui se busca al usuario dentro de los usuarios registrados 
         });
         if (!user){
             return res.status(404).json({
-                msg:"Usuario no encontrado"
+                msg:"Usuario no encontrado" // si no se encuentra BYE
             })
         }
-       const passCorrect = await  bcrypt.compare(req.body.password, user.password)
-       if(!passCorrect){ // si la constrasena no existe
+       const passCorrect = await  bcrypt.compare(req.body.password, user.password) //aqui hace la comparacion entre contrasena enviada y almacenada
+       if(!passCorrect){ 
         return res.status(401).json({
-            msg:"Credenciales invalidas"
+            msg:"Credenciales invalidas" // si la constrasena no es igual BYE
+        })}
+        //TODO: crear token y regresarlo al cliente
+        const payload = {
+            userId:user.id,
+        };
+        const token  = await jwt.encode(payload,config.jwt.secret)
+        return res.json({
+            msg:"Login Correcto ✅",
+            data:{token}
         })
-       }
 
     } catch (error) {
         return res.status(500).json({
-            msg:"Error al hacer login",
+            msg:"Error al hacer login", // error en el login GENERAL 
             error:error
         })
         
